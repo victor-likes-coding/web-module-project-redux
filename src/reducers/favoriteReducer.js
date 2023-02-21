@@ -2,7 +2,7 @@ import { ADD_FAVORITE, REMOVE_FAVORITE, TOGGLE_FAVORITES } from "../actions/favo
 
 const initialState = {
     favorites: [],
-    dispayFavorites: false,
+    displayFavorites: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +14,10 @@ const reducer = (state = initialState, action) => {
             };
 
         case ADD_FAVORITE:
+            if (state.favorites.find((movie) => movie.id === action.payload.id)) {
+                return state;
+            }
+
             return {
                 ...state,
                 favorites: [...state.favorites, action.payload],
@@ -22,7 +26,7 @@ const reducer = (state = initialState, action) => {
         case TOGGLE_FAVORITES:
             return {
                 ...state,
-                dispayFavorites: !state.dispayFavorites,
+                displayFavorites: !state.displayFavorites,
             };
 
         default:
