@@ -1,3 +1,5 @@
+import { ADD_FAVORITE, REMOVE_FAVORITE, TOGGLE_FAVORITES } from "../actions/favoritesActions";
+
 const initialState = {
     favorites: [],
     dispayFavorites: false,
@@ -5,17 +7,23 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        // case DELETE_MOVIE:
-        //     return {
-        //         ...state,
-        //         movies: state.movies.filter((item) => action.payload !== item.id),
-        //     };
+        case REMOVE_FAVORITE:
+            return {
+                ...state,
+                favorites: state.favorites.filter((item) => action.payload !== item.id),
+            };
 
-        // case ADD_MOVIE:
-        //     return {
-        //         ...state,
-        //         movies: [...state.movies, action.payload],
-        //     };
+        case ADD_FAVORITE:
+            return {
+                ...state,
+                favorites: [...state.favorites, action.payload],
+            };
+
+        case TOGGLE_FAVORITES:
+            return {
+                ...state,
+                dispayFavorites: !state.dispayFavorites,
+            };
 
         default:
             return state;
